@@ -99,7 +99,7 @@ export default function App() {
             <div className="bg-emerald-600 p-2 rounded-lg text-white">
               <ShieldCheck size={24} />
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-stone-800 hidden sm:block">Conciencia Alcohol</h1>
+            <h1 className="text-lg sm:text-xl font-bold tracking-tight text-stone-800">Conciencia Alcohol</h1>
           </div>
           
           {/* Desktop Nav */}
@@ -126,7 +126,7 @@ export default function App() {
           </nav>
 
           {/* Mobile Menu Button Placeholder (Simplified for this demo, using bottom nav instead) */}
-          <div className="lg:hidden text-sm font-medium text-stone-500">
+          <div className="hidden sm:block lg:hidden text-sm font-medium text-stone-500">
             Tu salud, tu decisión
           </div>
         </div>
