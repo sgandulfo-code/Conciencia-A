@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { AlertTriangle, ArrowRight, ShieldAlert, Phone } from 'lucide-react';
+import { AlertTriangle, ArrowRight, ShieldAlert, Phone, Loader2, MapPin } from 'lucide-react';
+import { searchHelpByLocation } from '../utils/searchHelp';
 
 const questions = [
   "¿Has ocultado botellas vacías o envases para que nadie en tu casa note cuánto tomaste realmente?",
@@ -17,6 +18,7 @@ export function RealityCheck() {
   const [currentQ, setCurrentQ] = useState(0);
   const [yesCount, setYesCount] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [isLocating, setIsLocating] = useState<'groups' | 'professionals' | null>(null);
 
   const handleAnswer = (isYes: boolean) => {
     if (isYes) setYesCount(prev => prev + 1);
@@ -124,10 +126,20 @@ export function RealityCheck() {
               Reconocer un patrón destructivo es el paso más valiente. Existen profesionales capacitados para ayudarte sin juzgarte.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="flex-1 px-6 py-3 bg-stone-900 hover:bg-stone-800 text-white font-semibold rounded-xl transition-colors text-center">
+              <button 
+                onClick={() => searchHelpByLocation('groups', () => setIsLocating('groups'), () => setIsLocating(null))}
+                disabled={isLocating !== null}
+                className="flex-1 px-6 py-3 bg-stone-900 hover:bg-stone-800 text-white font-semibold rounded-xl transition-colors text-center flex items-center justify-center gap-2 disabled:opacity-70"
+              >
+                {isLocating === 'groups' ? <Loader2 className="animate-spin" size={20} /> : <MapPin size={20} />}
                 Buscar Grupos de Apoyo
               </button>
-              <button className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors text-center">
+              <button 
+                onClick={() => searchHelpByLocation('professionals', () => setIsLocating('professionals'), () => setIsLocating(null))}
+                disabled={isLocating !== null}
+                className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors text-center flex items-center justify-center gap-2 disabled:opacity-70"
+              >
+                {isLocating === 'professionals' ? <Loader2 className="animate-spin" size={20} /> : <MapPin size={20} />}
                 Contactar a un Profesional
               </button>
             </div>

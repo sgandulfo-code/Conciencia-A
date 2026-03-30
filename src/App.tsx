@@ -10,13 +10,15 @@ import { DrinkSimulator } from './components/DrinkSimulator';
 import { CumulativeImpact } from './components/CumulativeImpact';
 import { FaceAgingSimulator } from './components/FaceAgingSimulator';
 import { RealityCheck } from './components/RealityCheck';
-import { Info, ShieldCheck, Activity, BookOpen, Brain, Clock, Calculator, Wine, History, UserPlus, Eye } from 'lucide-react';
+import { Info, ShieldCheck, Activity, BookOpen, Brain, Clock, Calculator, Wine, History, UserPlus, Eye, Loader2, MapPin } from 'lucide-react';
+import { searchHelpByLocation } from './utils/searchHelp';
 
 type ViewMode = 'info' | 'test' | 'myths' | 'recovery' | 'calculator' | 'simulator' | 'history' | 'face' | 'reality';
 
 export default function App() {
   const [selectedGroup, setSelectedGroup] = useState<AgeGroup>('adolescentes');
   const [viewMode, setViewMode] = useState<ViewMode>('info');
+  const [isLocatingHelp, setIsLocatingHelp] = useState(false);
 
   const currentData = contentData.find(d => d.id === selectedGroup)!;
 
@@ -200,7 +202,12 @@ export default function App() {
             </p>
           </div>
           <div className="md:ml-auto">
-             <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors shadow-md shadow-blue-200">
+             <button 
+               onClick={() => searchHelpByLocation('professionals', () => setIsLocatingHelp(true), () => setIsLocatingHelp(false))}
+               disabled={isLocatingHelp}
+               className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors shadow-md shadow-blue-200 flex items-center gap-2 disabled:opacity-70"
+             >
+               {isLocatingHelp ? <Loader2 className="animate-spin" size={20} /> : <MapPin size={20} />}
                Buscar Ayuda Profesional
              </button>
           </div>
