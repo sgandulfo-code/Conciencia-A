@@ -9,9 +9,10 @@ import { CostCalculator } from './components/CostCalculator';
 import { DrinkSimulator } from './components/DrinkSimulator';
 import { CumulativeImpact } from './components/CumulativeImpact';
 import { FaceAgingSimulator } from './components/FaceAgingSimulator';
-import { Info, ShieldCheck, Activity, BookOpen, Brain, Clock, Calculator, Wine, History, UserPlus } from 'lucide-react';
+import { RealityCheck } from './components/RealityCheck';
+import { Info, ShieldCheck, Activity, BookOpen, Brain, Clock, Calculator, Wine, History, UserPlus, Eye } from 'lucide-react';
 
-type ViewMode = 'info' | 'test' | 'myths' | 'recovery' | 'calculator' | 'simulator' | 'history' | 'face';
+type ViewMode = 'info' | 'test' | 'myths' | 'recovery' | 'calculator' | 'simulator' | 'history' | 'face' | 'reality';
 
 export default function App() {
   const [selectedGroup, setSelectedGroup] = useState<AgeGroup>('adolescentes');
@@ -37,6 +38,8 @@ export default function App() {
         return <CumulativeImpact />;
       case 'face':
         return <FaceAgingSimulator />;
+      case 'reality':
+        return <RealityCheck />;
       default:
         return <SplitScreen data={currentData} />;
     }
@@ -84,6 +87,11 @@ export default function App() {
           title: <>El Espejo del <br className="hidden sm:block" /><span className="text-purple-600">Futuro</span></>,
           desc: "Una simulación visual de cómo el alcohol acelera el envejecimiento y afecta tu apariencia física."
         };
+      case 'reality':
+        return {
+          title: <>Test de <br className="hidden sm:block" /><span className="text-rose-600">Honestidad</span></>,
+          desc: "Un ejercicio de auto-reflexión profundo sobre tus hábitos reales de consumo. Sin filtros, sin excusas."
+        };
     }
   };
 
@@ -110,6 +118,7 @@ export default function App() {
               { id: 'simulator', label: 'Simulador', icon: Wine },
               { id: 'history', label: 'Historial', icon: History },
               { id: 'face', label: 'Espejo', icon: UserPlus },
+              { id: 'reality', label: 'Honestidad', icon: Eye },
               { id: 'myths', label: 'Mitos', icon: Brain },
               { id: 'recovery', label: 'Salud', icon: Clock },
               { id: 'calculator', label: 'Costo', icon: Calculator },
@@ -206,7 +215,7 @@ export default function App() {
             { id: 'info', label: 'Info', icon: BookOpen },
             { id: 'test', label: 'Test', icon: Activity },
             { id: 'simulator', label: 'Vaso', icon: Wine },
-            { id: 'face', label: 'Espejo', icon: UserPlus },
+            { id: 'reality', label: 'Verdad', icon: Eye },
             { id: 'history', label: 'Historial', icon: History },
           ].map((item) => (
             <button
