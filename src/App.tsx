@@ -213,6 +213,16 @@ export default function App() {
           </div>
         </div>
 
+        {/* View Counter Badge */}
+        <div className="mt-8 flex justify-center opacity-70 hover:opacity-100 transition-opacity">
+          <a href="https://hits.seeyoufarm.com" target="_blank" rel="noopener noreferrer">
+            <img 
+              src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fconciencia-a.vercel.app&count_bg=%23059669&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitas&edge_flat=false" 
+              alt="Contador de visitas" 
+            />
+          </a>
+        </div>
+
       </main>
 
       {/* Mobile Bottom Navigation */}
